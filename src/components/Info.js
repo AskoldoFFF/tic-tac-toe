@@ -5,8 +5,8 @@ class Info extends React.Component {
         return (
             <div className = "info-square">
                 <h1>Score</h1>
-                <p>Player1:</p>
-                <p>Player2:</p>
+                <p>{this.props.playerX}: {this.props.scorePlayerX}</p>
+                <p>{this.props.playerO}: {this.props.scorePlayerO}</p>
             </div>
         );
     }
