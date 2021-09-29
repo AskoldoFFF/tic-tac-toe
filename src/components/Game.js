@@ -7,7 +7,43 @@ class Game extends React.Component {
         this.state = {
             fields: Array(9).fill(null),
             count: 0,
+            scorePlayerX: 1,
+            scorePlayerO: 1,
         };
+    }
+
+    checkWinner = (curField) => {
+        this.winnerLine = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ]
+
+        for(let i = 0; i < this.winnerLine.length; i++) {
+            let line = this.winnerLine[i];
+            if(this.state.fields[line[0]] === curField &&
+                this.state.fields[line[1]] === curField &&
+                this.state.fields[line[2]] === curField) {
+                    if(curField === 'X') {
+                        this.setState({scorePlayerX: this.state.scorePlayerX + 1});
+                        this.props.updateScorePlayerX(this.state.scorePlayerX);
+                        alert("Победитель: " + this.props.playerX);
+                    }else {
+                        this.setState({scorePlayerO: this.state.scorePlayerO + 1});
+                        this.props.updateScorePlayerO(this.state.scorePlayerO);
+                        alert("Победитель: " + this.props.playerO);
+                    }
+                    setTimeout(() => {
+                        this.setState({fields: Array(9).fill(null)});
+                        this.setState({count: 0});
+                    }, 600);
+                }
+        }
     }
 
     clickHandler = event => {
@@ -22,6 +58,7 @@ class Game extends React.Component {
         else{
             alert("Ход недопустим!");
         }
+        this.checkWinner(curFields[data]);
     }
     
 
