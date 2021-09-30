@@ -9,7 +9,6 @@ class Game extends React.Component {
             count: 0,
             scorePlayerX: 1,
             scorePlayerO: 1,
-            winner: 0,
         };
     }
 
@@ -34,19 +33,16 @@ class Game extends React.Component {
                     if(curField === 'X') {
                         this.setState({scorePlayerX: this.state.scorePlayerX + 1});
                         this.props.updateScorePlayerX(this.state.scorePlayerX);
-                        // this.setState({winner: 1});
                         ind = 1;
                         alert("Победитель: " + this.props.playerX + " " + ind);
                     }else {
                         this.setState({scorePlayerO: this.state.scorePlayerO + 1});
                         this.props.updateScorePlayerO(this.state.scorePlayerO);
-                        // this.setState({winner: 1});
                         ind = 1;
                         alert("Победитель: " + this.props.playerO);
                     }
                     setTimeout(() => {
                         this.setState({fields: Array(9).fill(null)});
-                        // this.setState({winner: 0});
                         this.setState({count: 0});
                     }, 600);
                     break;
@@ -67,7 +63,6 @@ class Game extends React.Component {
     }
 
     clickHandler = event => {
-        //console.log(1);
         let data = event.target.getAttribute('data');
         let curFields = this.state.fields;
         if(curFields[data] === null) {
