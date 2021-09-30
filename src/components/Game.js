@@ -24,6 +24,7 @@ class Game extends React.Component {
             [0, 4, 8],
             [2, 4, 6]
         ]
+        let ind = 0;
 
         for(let i = 0; i < this.winnerLine.length; i++) {
             let line = this.winnerLine[i];
@@ -33,21 +34,25 @@ class Game extends React.Component {
                     if(curField === 'X') {
                         this.setState({scorePlayerX: this.state.scorePlayerX + 1});
                         this.props.updateScorePlayerX(this.state.scorePlayerX);
-                        this.setState({winner: 1});
-                        alert("Победитель: " + this.props.playerX + " " + this.state.winner);
+                        // this.setState({winner: 1});
+                        ind = 1;
+                        alert("Победитель: " + this.props.playerX + " " + ind);
                     }else {
                         this.setState({scorePlayerO: this.state.scorePlayerO + 1});
                         this.props.updateScorePlayerO(this.state.scorePlayerO);
-                        this.setState({winner: 1});
+                        // this.setState({winner: 1});
+                        ind = 1;
                         alert("Победитель: " + this.props.playerO);
                     }
                     setTimeout(() => {
                         this.setState({fields: Array(9).fill(null)});
+                        // this.setState({winner: 0});
                         this.setState({count: 0});
                     }, 600);
+                    break;
                 }
         }
-        if(this.state.count === 8 && this.state.winner === 0) {
+        if(this.state.count === 8 && ind === 0) {
             this.setState({scorePlayerX: this.state.scorePlayerX + 1});
             this.setState({scorePlayerO: this.state.scorePlayerO + 1});
             this.props.updateScorePlayerX(this.state.scorePlayerX);
@@ -58,7 +63,7 @@ class Game extends React.Component {
                 this.setState({count: 0});
             }, 600);
         }
-        this.setState({winner: 0});
+
     }
 
     clickHandler = event => {
